@@ -22,6 +22,8 @@ context('hello-world', () => {
     });
     describe('When I visit the homepage', () => {
         before('Visit the page', () => {
+            cy.server();
+            cy.route('POST', '/', 'fixture:hello-world/files-at-root.json');
             cy.visit('http://localhost:8040/');
         });
     
