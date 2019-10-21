@@ -73,6 +73,9 @@ app.get('*', (req, res, next) => {
     if (filepath.indexOf(exploreRootPath) !== 0) return next();
     if (!fs.existsSync(filepath)) return next();
 
+    const stats = fs.lstatSync(filepath);
+    if (!stats.isFile()) return next();
+
     res.sendFile(filepath);
 });
 
